@@ -1,0 +1,6 @@
+{
+  "name": "PoshanSetu Desktop Monitoring Portal",
+  "description": "Child Development Project Officer (CDPO) Superior Monitoring Portal — Live Stock, Take-Home Rations & Meal Tracker for Anganwadi Centers with Real-time Firebase Sync",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

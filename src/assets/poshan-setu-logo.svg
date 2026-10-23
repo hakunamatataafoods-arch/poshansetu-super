@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <style>
+      .cls-orange { fill: #F27A1A; }
+      .cls-forest { fill: #0B6E4F; }
+      .cls-leaf { fill: #74BF44; }
+      .cls-white { fill: #FFFFFF; }
+      .brand-text-poshan { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-weight: 800; font-size: 64px; fill: #F27A1A; }
+      .brand-text-setu { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-weight: 800; font-size: 64px; fill: #0B6E4F; }
+    </style>
+  </defs>
+
+  <!-- Central Adult Figure (Orange) -->
+  <!-- Head -->
+  <circle cx="265" cy="92" r="32" class="cls-orange" />
+  <!-- Body & Reaching Arm -->
+  <path d="M 200 46 C 180 82 178 126 215 160 C 248 190 286 218 296 265 C 298 274 290 282 284 290 C 270 292 248 245 228 215 C 205 180 188 140 180 96 C 176 80 185 58 200 46 Z" class="cls-orange" />
+  <path d="M 215 160 C 245 155 285 185 298 245 C 302 265 295 282 248 290 C 275 250 285 205 240 178 Z" class="cls-orange" />
+
+  <!-- Left Child (Forest Green) -->
+  <!-- Head -->
+  <circle cx="185" cy="216" r="22" class="cls-forest" />
+  <!-- Torso & Arms -->
+  <path d="M 136 220 C 145 248 165 260 185 260 C 205 260 225 248 239 200 C 230 205 220 220 208 238 C 196 250 175 250 162 238 C 152 225 142 210 136 220 Z" class="cls-forest" />
+  <path d="M 160 248 L 185 304 L 210 248 C 215 275 205 304 185 308 C 165 304 155 275 160 248 Z" class="cls-forest" />
+
+  <!-- Right Child (Leaf Green) -->
+  <!-- Head & Hair Pigtails -->
+  <circle cx="348" cy="230" r="22" class="cls-leaf" />
+  <!-- Left Pigtail -->
+  <path d="M 330 222 C 320 216 312 225 316 235 C 322 240 330 234 330 222 Z" class="cls-leaf" />
+  <!-- Right Pigtail -->
+  <path d="M 368 222 C 378 216 386 225 382 235 C 376 240 368 234 368 222 Z" class="cls-leaf" />
+  <!-- Torso & Reaching Arms -->
+  <path d="M 299 230 C 310 258 330 268 350 268 C 370 268 388 255 400 242 C 390 250 380 260 368 262 C 350 265 330 255 320 238 Z" class="cls-leaf" />
+  <path d="M 322 260 L 350 312 L 378 260 C 382 285 372 312 350 316 C 328 312 318 285 322 260 Z" class="cls-leaf" />
+
+  <!-- Top Leaves (Left & Right) -->
+  <!-- Top Left Leaf (Light Green) -->
+  <path d="M 100 100 C 120 145 155 178 185 182 C 182 145 155 110 100 100 Z" class="cls-leaf" />
+  <!-- Mid Left Sprout (Forest Green) -->
+  <path d="M 90 172 C 112 182 135 210 144 218 C 135 200 120 175 90 172 Z" class="cls-forest" />
+  <!-- Top Right Leaf (Light Green) -->
+  <path d="M 408 78 C 360 88 335 125 325 180 C 360 170 395 130 408 78 Z" class="cls-leaf" />
+  <!-- Mid Right Sprout (Forest Green) -->
+  <path d="M 426 166 C 395 170 380 195 372 215 C 382 205 402 178 426 166 Z" class="cls-forest" />
+
+  <!-- Base Bridge Arch ("Setu") -->
+  <!-- Curved upper bridge border -->
+  <path d="M 152 342 C 205 310 305 310 360 342 C 310 322 205 322 152 342 Z" class="cls-white" />
+  <path d="M 148 344 C 205 308 307 308 364 344 L 350 380 C 342 360 326 345 306 345 C 286 345 272 360 264 380 C 256 360 240 345 220 345 C 200 345 186 360 178 380 Z" class="cls-forest" />
+
+  <!-- Bottom Sweeping Foundation Leaves -->
+  <!-- Left Sweep Leaf -->
+  <path d="M 36 322 C 105 320 175 365 205 382 C 145 378 85 360 36 322 Z" class="cls-leaf" />
+  <!-- Right Sweep Leaf -->
+  <path d="M 476 322 C 405 320 335 365 305 382 C 365 378 425 360 476 322 Z" class="cls-leaf" />
+
+  <!-- Bridge Pillars & Base Foundation -->
+  <rect x="214" y="348" width="12" height="34" class="cls-forest" />
+  <rect x="286" y="348" width="12" height="34" class="cls-forest" />
+
+  <!-- Brand Typography -->
+  <text x="40" y="448" class="brand-text-poshan">Poshan</text>
+  <text x="310" y="448" class="brand-text-setu">Setu</text>
+</svg>
