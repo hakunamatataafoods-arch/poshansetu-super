@@ -13,6 +13,7 @@ import {
   Users,
   Flame,
   Award,
+  Phone,
 } from 'lucide-react';
 import { AnganwadiCentre } from '../types/poshan';
 import { CENTRES, DashboardData } from '../services/firebaseRtdb';
@@ -59,6 +60,27 @@ export const ExecutiveOverviewTab: React.FC<ExecutiveOverviewTabProps> = ({
     mealType: 'Hot Cooked Lunch',
     totalGrams: 3200,
   };
+
+  // Active centre worker and helper personnel details dynamically bound to currentCentre
+  const workerName =
+    language === 'gu'
+      ? currentCentre.workerNameGu || currentCentre.workerName
+      : currentCentre.workerName;
+  const workerPhone = currentCentre.phone || '+91 98254 12044';
+
+  const helperName =
+    language === 'gu'
+      ? currentCentre.helperNameGu || currentCentre.helperName || 'શ્રીમતી જયાબેન વણકર'
+      : currentCentre.helperName || 'Smt. Jayaben Vankar';
+  const helperPhone = currentCentre.helperPhone || '+91 98254 12045';
+
+  const matchedCentre =
+    CENTRES.find((c) => c.id === currentCentre.id || c.code === currentCentre.code) ||
+    currentCentre;
+  const centreAddress =
+    language === 'gu'
+      ? currentCentre.addressGu || matchedCentre.addressGu || `${currentCentre.nameGu}, આણંદ જિલ્લો`
+      : currentCentre.addressEn || matchedCentre.addressEn || `${currentCentre.nameEn}, Anand District`;
 
   const circleCentres = [
     {
@@ -166,47 +188,61 @@ export const ExecutiveOverviewTab: React.FC<ExecutiveOverviewTabProps> = ({
 
       {/* 2. Four Colorful & Attractive KPI Cards (Replaced children present & meal compliance with Recent Meal Transactions) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Card 1: RECENT MEAL DISTRIBUTION TRANSACTION (Special User Highlight) */}
-        <div className="relative overflow-hidden rounded-2xl p-4.5 bg-gradient-to-br from-emerald-600 via-[#0B6E4F] to-[#074D37] text-white shadow-lg shadow-emerald-900/15 border border-emerald-400/30 flex flex-col justify-between">
-          <div className="absolute top-0 right-0 -mr-6 -mt-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-100 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-300 animate-ping" />
-                {language === 'gu' ? 'તાજેતરનું ભોજન વિતરણ' : 'RECENT MEAL TRANSACTION'}
-              </span>
-              <div className="w-7 h-7 rounded-lg bg-white/20 backdrop-blur-xs text-white flex items-center justify-center shadow-xs">
-                <UtensilsCrossed className="w-4 h-4" />
+        {/* Card 1: Centre Details (Center Name, Worker Name, Helper Name, Center Address, Center Code) */}
+        <div className="relative overflow-hidden rounded-2xl p-4 sm:p-4.5 bg-gradient-to-br from-emerald-700 via-[#0B6E4F] to-[#043e2d] text-white shadow-lg shadow-emerald-950/20 border border-emerald-400/40 flex flex-col justify-between">
+          <div className="absolute top-0 right-0 -mr-6 -mt-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
+          
+          <div className="space-y-2.5">
+            {/* Center Name & Center Code */}
+            <div className="flex items-start justify-between gap-2 border-b border-white/15 pb-2">
+              <div className="min-w-0 flex-1">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-200 block mb-0.5">
+                  {language === 'gu' ? 'કેન્દ્રનું નામ' : 'Center Name'}
+                </span>
+                <h3 className="font-black text-sm sm:text-base text-white leading-tight truncate" title={language === 'gu' ? currentCentre.nameGu : currentCentre.nameEn}>
+                  {language === 'gu' ? currentCentre.nameGu : currentCentre.nameEn}
+                </h3>
+              </div>
+              <div className="shrink-0 text-right">
+                <span className="text-[9px] font-extrabold uppercase tracking-wider text-emerald-200 block mb-0.5">
+                  {language === 'gu' ? 'કેન્દ્ર કોડ' : 'Center Code'}
+                </span>
+                <span className="px-2 py-0.5 rounded-md bg-white/20 text-amber-300 font-mono text-[11px] font-black border border-white/20 inline-block shadow-2xs">
+                  {currentCentre.code}
+                </span>
               </div>
             </div>
 
-            <div className="font-extrabold text-sm sm:text-base tracking-tight leading-tight line-clamp-1 text-white">
-              {latestMeal.menuName}
+            {/* Anganwadi Worker Name */}
+            <div className="bg-white/10 rounded-xl px-2.5 py-2 border border-white/15">
+              <span className="text-[10px] font-bold text-emerald-200 uppercase tracking-wider block">
+                {language === 'gu' ? 'આંગણવાડી કાર્યકરનું નામ' : 'Anganwadi Worker Name'}
+              </span>
+              <div className="text-xs sm:text-sm font-black text-white mt-0.5 truncate">
+                {workerName}
+              </div>
             </div>
 
-            <div className="mt-2.5 py-1.5 px-2.5 rounded-lg bg-white/15 backdrop-blur-xs border border-white/20 flex items-center justify-between text-xs">
-              <span className="text-emerald-100 font-semibold">
-                {language === 'gu' ? 'પીરસાયેલ બાળકો:' : 'Students Served:'}
+            {/* Anganwadi Helper Name */}
+            <div className="bg-white/10 rounded-xl px-2.5 py-2 border border-white/15">
+              <span className="text-[10px] font-bold text-emerald-200 uppercase tracking-wider block">
+                {language === 'gu' ? 'આંગણવાડી તેડાગરનું નામ' : 'Anganwadi Helper Name'}
               </span>
-              <span className="font-black text-amber-300 text-sm flex items-center gap-1">
-                <Users className="w-3.5 h-3.5" />
-                {latestMeal.studentsPresent}{' '}
-                <span className="text-[10px] text-emerald-100 font-normal">
-                  {language === 'gu' ? 'હાજર' : 'present'}
-                </span>
-              </span>
+              <div className="text-xs sm:text-sm font-black text-white mt-0.5 truncate">
+                {helperName}
+              </div>
             </div>
-          </div>
 
-          <div className="mt-3 pt-2.5 border-t border-white/15 flex items-center justify-between text-[11px] text-emerald-100">
-            <span className="truncate max-w-[150px] font-medium">
-              📍 {language === 'gu' ? currentCentre.nameGu : currentCentre.nameEn}
-            </span>
-            <span className="font-mono text-emerald-200 font-bold">
-              {typeof latestMeal.timestamp === 'string'
-                ? latestMeal.timestamp
-                : new Date(latestMeal.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-            </span>
+            {/* Center Address */}
+            <div className="bg-black/20 rounded-xl px-2.5 py-2 border border-white/15">
+              <div className="flex items-center gap-1.5 text-amber-300 text-[10px] font-bold uppercase tracking-wider mb-0.5">
+                <MapPin className="w-3.5 h-3.5 shrink-0" />
+                <span>{language === 'gu' ? 'કેન્દ્રનું સરનામું' : 'Center Address'}</span>
+              </div>
+              <p className="text-[11px] text-emerald-100 font-medium leading-relaxed">
+                {centreAddress}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -460,14 +496,14 @@ export const ExecutiveOverviewTab: React.FC<ExecutiveOverviewTabProps> = ({
                   <span>{language === 'gu' ? 'આજનું ચકાસાયેલ ગરમ ભોજન' : "Today's Verified Hot Meal"}</span>
                   <Award className="w-4 h-4 text-amber-500" />
                 </h3>
-                <p className="text-[11px] text-slate-500">
+                <p className="text-[11px] text-slate-500 font-medium">
                   {language === 'gu'
-                    ? 'કાર્યકર: શ્રીમતી ભાવનાબેન પટેલ · બપોરે ૧૨:૧૮ વાગ્યે'
-                    : 'AWW: Smt. BhavnaBen Patel · 12:18 PM'}
+                    ? `કાર્યકર: ${workerName} · બપોરે ૧૨:૧૮ વાગ્યે`
+                    : `AWW: ${workerName} · 12:18 PM`}
                 </p>
               </div>
               <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase border border-emerald-200">
-                {language === 'gu' ? '૦૪-વડતાલ' : '04-Vadtal'}
+                {currentCentre.code}
               </span>
             </div>
 
@@ -485,27 +521,63 @@ export const ExecutiveOverviewTab: React.FC<ExecutiveOverviewTabProps> = ({
                   <span>22.58512° N, 72.93245° E (±4.2m)</span>
                 </div>
                 <div className="font-extrabold text-xs text-white mt-0.5">
-                  {language === 'gu'
-                    ? 'પૌષ્ટિક વેજિટેબલ ખીચડી અને તુવેર દાળ'
-                    : 'Paushtik Vegetable Khichdi & Tuver Dal'}
+                  {latestMeal.menuName}
                 </div>
                 <div className="text-[10px] text-slate-300">
                   {language === 'gu'
-                    ? 'આંગણવાડી ૦૪, સ્વામિનારાયણ મંદિર રોડ, વડતાલ, આણંદ જિલ્લો'
-                    : 'AWC 04, Swaminarayan Temple Road, Vadtal, Anand Dist.'}
+                    ? `${currentCentre.nameGu}, આણંદ જિલ્લો`
+                    : `${currentCentre.nameEn}, Anand Dist.`}
                 </div>
               </div>
             </div>
 
-            {/* Meal Inspection Details */}
+            {/* Meal Inspection Details with Personnel */}
             <div className="mt-4 space-y-2.5 text-xs">
+              <div className="flex items-center justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500 font-medium">
+                  {language === 'gu' ? 'કેન્દ્ર અને કોડ:' : 'Centre & Code:'}
+                </span>
+                <span className="font-extrabold text-slate-900">
+                  {language === 'gu' ? currentCentre.nameGu : currentCentre.nameEn}
+                </span>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500 font-medium">
+                  {language === 'gu' ? 'કાર્યકર (AWW):' : 'Worker (AWW):'}
+                </span>
+                <div className="text-right">
+                  <span className="font-extrabold text-slate-900 block">{workerName}</span>
+                  <a
+                    href={`tel:${workerPhone}`}
+                    className="text-[10px] text-emerald-700 hover:text-emerald-900 font-mono font-bold hover:underline inline-flex items-center gap-0.5"
+                  >
+                    <Phone className="w-2.5 h-2.5" />
+                    {workerPhone}
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500 font-medium">
+                  {language === 'gu' ? 'તેડાગર (AWH):' : 'Helper (AWH):'}
+                </span>
+                <div className="text-right">
+                  <span className="font-extrabold text-slate-900 block">{helperName}</span>
+                  <a
+                    href={`tel:${helperPhone}`}
+                    className="text-[10px] text-emerald-700 hover:text-emerald-900 font-mono font-bold hover:underline inline-flex items-center gap-0.5"
+                  >
+                    <Phone className="w-2.5 h-2.5" />
+                    {helperPhone}
+                  </a>
+                </div>
+              </div>
               <div className="flex items-center justify-between py-1 border-b border-slate-100">
                 <span className="text-slate-500 font-medium">
                   {language === 'gu' ? 'પીરસાયેલા બાળકો:' : 'Children Served:'}
                 </span>
                 <span className="font-extrabold text-slate-900 flex items-center gap-1">
                   <Users className="w-3.5 h-3.5 text-emerald-600" />
-                  {language === 'gu' ? '૩૯ બાળકો હાજર' : '39 children present'}
+                  {latestMeal.studentsPresent || attendance.present_count || 39} {language === 'gu' ? 'બાળકો હાજર' : 'children present'}
                 </span>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-slate-100">

@@ -100,9 +100,15 @@ export interface AnganwadiCentre {
   code: string;
   nameEn: string;
   nameGu: string;
+  addressEn?: string;
+  addressGu?: string;
   taluka: string;
   sector: string;
   workerName: string;
+  workerNameGu?: string;
+  helperName?: string;
+  helperNameGu?: string;
+  helperPhone?: string;
   supervisorName: string;
   phone?: string;
   workerRollNo?: string;
